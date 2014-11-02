@@ -10,6 +10,27 @@
 		<script src="assert.js"></script>
 	<style>
 
+@font-face {
+    font-family: 'inconsolatamedium';
+    src: url('inconsolata-webfont.eot');
+    src: url('inconsolata-webfont.eot?#iefix') format('embedded-opentype'),
+         url('inconsolata-webfont.woff2') format('woff2'),
+         url('inconsolata-webfont.woff') format('woff'),
+         url('inconsolata-webfont.ttf') format('truetype'),
+         url('inconsolata-webfont.svg#inconsolatamedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+	
+	code {
+		font-family: 'inconsolatamedium', monospace;
+		box-sizing: border-box;
+		font-size: 15px;
+		padding: 30px !important;
+	}
+	
 	pre {
 	  overflow-x: auto;
 	  overflow-y: hidden;
@@ -18,7 +39,7 @@
 	/* margin-right: -20px; */
 	width: calc(100% + 100px);
 	}
-	
+		
 	h2, h3 {
 		font-weight: normal;
 		text-align: center;
@@ -74,12 +95,6 @@
 	
 	pre {
 		box-sizing: border-box;
-	}
-	
-	code {
-		box-sizing: border-box;
-		font-size: 14px;
-		padding: 30px !important;
 	}
 	
 	footer {
@@ -235,15 +250,15 @@
 				['\\|([^\s^\|]{1,})\\|', '<b>$1</b>'],
 				['@@@([^@]*)@@@', '<div class="block"><p>$1</p></div>'],
 				['\\^([^\^]*)\\^([^\^]*)\\^', '<div><div class="bad"><pre><code class="js">$1</code></pre></div> <div class="good"><pre><code class="js">$2</code></pre></div><div style="clear:both;"></div></div>'],
-				['```([^`]*)```', function(match, m1){ return '<pre><code class="js">' + escapeHtml(m1) + '</code></pre>'}],
-				['\n(\t*)\n(\t*)\n', '</p><p>'],
-				['\n(\t*)\n', '<br><br>'],
+				['```(?:[\n]*)?([^`]*)(?:[\n]*)?```', function(match, m1){ return '<pre><code class="js">' + escapeHtml(m1) + '</code></pre>'}],
+				['\n\n\n', '</p><p>'],
+				['\n\n', '<br><br>'],
 				['\\?\\?\\?\\%([^\%]*)\\%(([^\%^\n]*)\%)?', function(xxx, m1, m2, right_answer){
 						console.log('m1', arguments);
 						codes.push(m1);
 						ra.push(right_answer);
 						var ind = codes.length - 1;
-						return '<div class="test"><input type="text" placeholder="Введіть свій код сюди..." /><button type="check" data-i="' + ind + '">перевірити!</button><div style="clear:both;text-align:center"><a class="surrender" data-i="' + ind + '">Здаюсь, показажіть правильну відповідь</a></div></div>';
+						return '<div class="test"><input type="text" placeholder="Введіть свій код сюди..." /><button type="check" data-i="' + ind + '">перевірити!</button><div style="clear:both;text-align:center"><a class="surrender" data-i="' + ind + '">Здаюсь, покажіть правильну відповідь</a></div></div>';
 					}],
 			]
 			
