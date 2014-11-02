@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TODO supply a title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+	<style>
+
+	pre {
+	  padding: 10px;
+	  width: 100%;
+	  overflow-x: auto;
+	  overflow-y: hidden;
+	  border: 1px solid black;
+	}
+
+	.wrapper {
+	  width: 800px;
+	  margin: auto;
+	}
+
+	hr {
+	  height: 1px; 
+	  border: none;
+	  border-top: 2px solid rgb(75, 75, 75);
+	  border-bottom: 1px solid rgb(75, 75, 75);
+	  margin: 40px 70px;
+	}
+
+	h1 {
+	  font-weight: normal; 
+	  margin-top: 80px;
+	  margin-bottom: 30px;
+	  padding-left: 110px;
+	  padding-right: 80px;
+	}
+
+	body {
+	  font-family:  Georgia; 
+	}
+
+	.block {
+	  border-style: solid;
+	  border-width: 35px 10px 20px 80px;
+	  padding: 80px 70px 35px 30px;
+	  text-align: justify;
+	  border-color: rgb(255, 236, 42); 
+	  margin: 5px;
+	  position: relative;
+	}
+
+	.block2 {
+	  border-color: rgb(247, 54, 20); 
+	}
+
+	.block3 {
+	  border-color: rgb(95, 118, 248);
+	}
+
+
+	.block5:after {
+	  width: 10px;
+	  height: 105%;
+	  content:'-';
+	  position: absolute;
+	  top: 0px;
+	  right: -2px;
+	  background-color: rgb(255, 236, 42); 
+	  transform: rotate(4deg);
+	}
+	
+	.source {
+		display: none;
+	}
+	
+	pre {
+		padding: 10px;
+	}
+	
+	footer {
+		height: 150px;
+	}
+
+	</style>
+	</head>
+	<body>
+	<div class="wrapper"></div>
+	<div class="source">
+		
+		### Вивчайте Javascript - заради України, заради добра!
+		
+		@@@
+		
+"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful .
+Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. 
+
+
+
+To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it?
+    
+```
+getMapFunc: function(func) {
+  			var res;
+  			if (func && !(func instanceof Function)){
+  				if (func.indexOf("!") === 0) {
+  					res = (function(field) {
+  						return function() {
+  							return !this[field];
+  						}
+  					}(func.replace("!", "")))
+  				} else {
+  					res = (function(field) {
+  						return function() {
+  							return !!this[field];
+  						}
+  					}(func))
+  				}
+  			} else {
+  				res = func;
+  			}
+  			return res;
+}
+```
+		
+      
+But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+
+		@@@
+	</div>
+	<script>
+
+		var process_text = function(str){
+			var regs = [
+				['\#\#\#([^\n^\r]*)', '<h1>$1</h1>'],
+				['\n\n\n', '<hr />'],
+				['\n\n', '<br><br>'],
+				['@@@([^@]*)@@@', '<div class="block">$1</div>'],
+				['```([^`]*)```', '<pre><code>$1</code></pre>'],
+			]
+			
+			for(var i in regs){
+				var r = new RegExp(regs[i][0], 'g');
+				str = str.replace(r, regs[i][1]);
+			}
+			
+
+			return str;
+		}
+
+		
+		$(".wrapper").html(process_text($(".source").html()));
+		$('code').each(function(i, block) {
+			hljs.highlightBlock(block);
+		});
+	</script>
+	<footer>
+		
+	</footer>
+	</body>
+</html>
