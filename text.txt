@@ -301,6 +301,7 @@ var str = "Johnny got his gun";
 
 // console.log(wrapped); // <div>Johnny got his gun</div>
 ```
+
 ```
 // нехай змінна tag є тегом, в який треба загорнути строчку, а str - сама строчка.
 

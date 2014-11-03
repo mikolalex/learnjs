@@ -1,0 +1,183 @@
+ 
+@font-face {font-family: 'ProbaPro-Regular';src: url('webfonts/2C7715_0_0.eot');src: url('webfonts/2C7715_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2C7715_0_0.woff2') format('woff2'),url('webfonts/2C7715_0_0.woff') format('woff'),url('webfonts/2C7715_0_0.ttf') format('truetype');}
+
+
+.xml .javascript {
+	opacity: 1 !important;
+}
+	
+	code {
+		font-family: monospace;
+		box-sizing: border-box;
+		font-size: 15px;
+		padding: 30px !important;
+		font-family: monospace;
+	}
+	
+	pre {
+	  overflow-x: auto;
+	  overflow-y: hidden;
+	margin: 30px 0px;
+	margin-left: -30px;
+	/* margin-right: -20px; */
+	width: calc(100% + 100px);
+	}
+		
+	h2, h3 {
+		font-weight: normal;
+		text-align: center;
+	}
+
+	.wrapper {
+	  width: 900px;
+	  margin: auto;
+	}
+
+	hr {
+	  height: 1px; 
+	  border: none;
+	  border-top: 2px solid rgb(75, 75, 75);
+	  border-bottom: 1px solid rgb(75, 75, 75);
+	  margin: 40px 70px;
+	}
+
+	h1 {
+	  font-weight: normal; 
+	  margin-top: 80px;
+	  margin-bottom: 30px;
+	  padding-left: 110px;
+	  padding-right: 80px;
+	}
+
+	body {
+	  font-family:  Georgia; 
+	  font-size: 16px;
+	  font-family: 'ProbaPro-Regular';
+	}
+
+	.block {
+	  border-style: solid;
+	  border-width: 35px 10px 20px 80px;
+	  padding: 50px 70px 40px 30px;
+	  text-align: justify;
+	  border-color: rgb(255, 236, 42); 
+	  margin: 5px;
+	  position: relative;
+	}
+
+	.block2 {
+	  border-color: rgb(247, 54, 20); 
+	}
+
+	.block3 {
+	  border-color: rgb(95, 118, 248);
+	}
+	
+	.source {
+		display: none;
+	}
+	
+	pre {
+		box-sizing: border-box;
+	}
+	
+	footer {
+		height: 150px;
+	}
+	
+	p {
+		text-indent: 20px;
+	}
+	
+	li.disabled, li.disabled a {
+		color: grey;
+		cursor: default;
+		text-decoration: none;
+	}
+	
+	a {
+		color: darkred;
+	}
+	
+	li {
+		margin: 15px;
+	}
+	
+	.good, .bad {
+		width: 100%;
+		box-sizing: border-box;
+		margin-top: 25px;
+		position: relative;
+	}
+	
+	.good:before {
+		content: '✔ правильно';		
+		background-color: rgb(255, 236, 42); 
+		top: -15px;
+		left: 15px;
+		color: rgb(52, 52, 52);
+		position: absolute;
+		padding: 5px;
+		box-shadow: 2px 2px 2px grey;
+	}
+	
+	.bad:before {
+		content: '✖ неправильно';		
+		background-color: rgb(247, 54, 20);//  rgb(247, 54, 20);
+		top: -15px;
+		left: 15px;
+		color: rgb(52, 52, 52);
+		position: absolute;
+		padding: 5px;
+		box-shadow: 2px 2px 2px grey;
+	}
+	
+	.test {
+		width: 100%;
+	}
+	.test a span, .test a  {
+		cursor: pointer;
+		color: darkred;
+		text-decoration: underline;
+	}
+	
+	.test button span {
+		color: black !important;
+	}
+	
+	.test button {
+		float: right;
+		width: 100px;
+		height: 30px;
+	}
+	
+	.test input {
+		height: 30px;
+		display: block;
+		float: left;
+		box-sizing: border-box;
+		width: calc(100% - 100px);
+	}
+	
+	.check {
+		padding: 10px;
+	}
+	
+	.check.error {
+		background-color: rgb(201, 30, 0);
+		color: white;
+		font-size: 20px;
+	}
+	
+	.check.success {
+		background-color: rgb(60, 138, 60);
+		color: white;
+		font-size: 20px;
+	}
+	
+	.check.normal {
+		background-color: whitesmoke;
+		color: black;
+		font-size: 20px;
+		border: 1px dotted grey;
+	}
