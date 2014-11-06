@@ -197,4 +197,8 @@
 			margin-left: -5px;
 			width: calc(100% + 10px);
 		}
+		
+		code {
+			padding: 10px !important;
+		}
 	}

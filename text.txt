@@ -333,16 +333,13 @@ var str = "Johnny got his gun";
 
 ```
 // нехай змінна tag є тегом, в який треба загорнути строчку, а str - сама строчка.
-
 var tag = 'b';
 
 var str = 'Hello, Dolly!';
 
-//var wrapped = ???
-
 ???%wrapped == '<b>Hello, Dolly!</b>'%var wrapped = '<' + tag + '>' + str + '</' + tag + '>'%
 
-// console.log(wrapped); // <b>Hello, Dolly!</b>
+console.log(wrapped); // <b>Hello, Dolly!</b>
 ```
 Вітаю, ви дещо знаєте про змінні! :)
 
