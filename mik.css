@@ -11,7 +11,7 @@
 		box-sizing: border-box;
 		font-size: 13px;
 		padding: 30px !important;
-		font-family: monospace;
+		font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 	}
 	
 	.block img {
