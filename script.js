@@ -19,7 +19,7 @@ var active_butt = false;
 
 var fail = function(txt){
         active_butt.find('.check').remove();
-        $("<div />").addClass('check').addClass('error').text((txt || 'Невірно')).css('opacity', 0).appendTo(active_butt).animate({opacity: 1}, 500);
+        $("<div />").addClass('check').addClass('error').text('Невірно' + (txt ? ': ' + txt : '')).css('opacity', 0).appendTo(active_butt).animate({opacity: 1}, 500);
         //active_butt.append('<div class="check error">Невірно</div>').delay(3000)//.find('.check-error').hide();
 }
 var normal = function(txt){
@@ -50,12 +50,13 @@ var process_text = function(str){
                 ['```(?:[\n]*)?([^`]*)(?:[\n]*)?```', function(match, m1){ return '<pre><code class="js">' + escapeHtml(m1) + '</code></pre>'}],
                 ['\n\n\n', '</p><p>'],
                 ['\n\n', '<br><br>'],
-                ['\\?\\?\\?(m)?\\%([^\%]*)\\%(([^\%^\n]*)\%)?', function(xxx, multiline, m1, m2, right_answer){
-                                console.log('m1', arguments);
+                ['\\?\\?\\?(.{1,3})?\\%([^\%]*)\\%(([^\%]*)\%)?', function(xxx, multiline, m1, m2, right_answer){
+				var inp = multiline ? '<textarea style="width:calc(100% - 100px);box-sizing:border-box;height:' + (multiline*20) + 'px"></textarea>' : '<input type="text" placeholder="Введіть свій код сюди..." />';
                                 codes.push(m1);
+				var height = multiline ? multiline*20 : 30;
                                 ra.push(right_answer);
                                 var ind = codes.length - 1;
-                                return '<div class="test"><input type="text" placeholder="Введіть свій код сюди..." /><button type="check" data-i="' + ind + '">перевірити!</button><div style="clear:both;text-align:center"><a class="surrender" data-i="' + ind + '">Здаюсь, покажіть правильну відповідь</a></div></div>';
+                                return '<div class="test">' + inp + '<button style="height: ' + height + 'px;" type="check" data-i="' + ind + '">перевірити!</button><div style="clear:both;text-align:center"><a class="surrender" data-i="' + ind + '">Здаюсь, покажіть правильну відповідь</a></div></div>';
                         }],
         ]
 
@@ -101,6 +102,7 @@ $.get('text.txt', function(txt){
                         .replace(/\&quot\;/g, '"')
                         .replace(/\&#039\;/g, "'")
                         .replace(/\&lt;/g, '<')
+                        .replace(/\&amp;/g, '&')
                         .replace(/\&gt;/g, '>');
                 var user_code = $(this).prev().val();
                 var parent = $(this).closest('code').text()
@@ -117,7 +119,7 @@ $.get('text.txt', function(txt){
                                         \n\
                                 } catch(e){\n\
                                         console.log(e);\n\
-                                        fail(); \n\
+                                        fail(e.message); \n\
                                 }\n\
                         })()';
                 $("<script" + " />").html(code).appendTo('.wrapper');
