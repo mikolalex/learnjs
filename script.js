@@ -79,15 +79,24 @@ $.get('text.txt', function(txt){
         });
 
         var toc = [];
-        $(".wrapper h2").each(function(){
-                toc.push($(this).html());
+        $(".wrapper h2, .wrapper h3").each(function(i){
+                var tag = $(this).prop('tagName');
+                $(this).attr('id', 'chapter' + i);
+                toc.push([tag, $(this).html()]);
         })
+        
+        var zmist = ['<li style="display: none;"><ul>'];// 
 
         for(var i = 1; i < toc.length; i++){
-                $("#zmist").append('<li>' + toc[i] + '</li>');
+            if(toc[i][0] === 'H2'){
+                zmist.push('</ul></li><li><a href="#chapter' + i + '">' + toc[i][1] + '</a><ul>');
+            } else {
+                zmist.push('<li><a href="#chapter' + i + '">' + toc[i][1] + '</a></li>');
+            }
         }
 
-        $("#zmist").append('<li> ...далі буде</li>');
+        zmist.push('</ul></li><li> ...далі буде</li>');
+        $("#zmist").html(zmist.join(''));
 
         $(".wrapper").on('click', 'a.surrender', function(){
                 var ind = $(this).attr('data-i');
