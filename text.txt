@@ -1323,7 +1323,7 @@ var Kateryna = {
         person.status = 'unhappy';
     },
     love: function(who, whom){ // передаємо два аргументи, перший - 
-    це хто любить(у нас це буде Катерина), другий - кого люблять
+    //це хто любить(у нас це буде Катерина), другий - кого люблять
         if(whom.type == 'moscal'){
             // poor Kateryna!
             who.diddle(who); // сама себе занапастила(
