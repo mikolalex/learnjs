@@ -1426,6 +1426,7 @@ obj[k]; // '0'
     }
 %
 ```
+```
 /* 
 Напишіть функцію getKey, яка приймає об"єкт і ім"я ключа, і 
 */
@@ -1740,6 +1741,54 @@ console.log(plate); // {region: 'Donetsk', number: '2755', suffix: 'KK'};
 var plate = 'АН 2755 КК';
 var region = plate.slice(0, 2); // 'AH', символ під позицією end не включається
 var number = plate.slice(3, 7); // 2755
+```
+Ну, частинки номеру ми сік-так виріжемо, а як бути із регіонами?
+Нам треба записати, що АН - це Донецька область, АА - Київ і так далі.
+Можна, звичайно, зробити це гігантським if/else'ом
+```
+if(region_code == 'АН'){
+	region = 'Donetsk';
+} else if(region_code == 'AA'){
+	region = 'Kyiv';
+} else if(...){ 
+	... // і так далі
+}
+```
+Цей спосіб добре підійшов би, якби вам платили не за виконану роботу, а за обсяг написаного коду. Тоді так, це було б чудовим рішенням.
+Однак, якщо ви цінуєте лаконічність(а вам доведеться її цінувати, якщо не хочете загрузнути по коліна в коді), то є кращий варіант.
+```
+var region_names = {
+	AA: 'Kyiv',
+	AH: 'Donetsk',
+	AP: 'Zaporizhzhya',
+	...
+}
+var region_code = 'AP';
+var region = region_codes[region_code]; // 'Zaporizhzhya'
+// !!!
+```
+Отак набагато краще!
+region_names - це об"єкт, який виконує роль словника, він дозволяє, знаючи код області, отримати її назву.
+Так як ім"я ключа(код області) нам невідоме наперед, ми шукаємо потрібний елемент у об"єкті за допомогою нотації квадратних дужок.
+Давайте тепер спробуємо це склеїти у функцію
+```
+var parse_plate = function(plate){
+	var region_names = {
+		AA: 'Kyiv',
+		AH: 'Donetsk',
+		AP: 'Zaporizhzhya',
+		/* і т.д. */
+	}
+	var region_code = plate.slice(0, 2);
+	var number = plate.slice(3, 7);
+	var suffix = plate.slice(8, 10);
+	return {
+		region: region_names[region_code],
+		number: number,
+		suffix: suffix
+	}
+}
+
 ```
 
 @@@
