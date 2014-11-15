@@ -5,6 +5,15 @@
 .xml .javascript {
 	opacity: 1 !important;
 }
+
+.quote {
+	font-style: italic;
+	width: 80%;
+	margin: auto;
+	font-weight: bold;
+	text-align: justify;
+	padding: 10px 30px;
+}
 	
 	code {
 		font-family: monospace;
