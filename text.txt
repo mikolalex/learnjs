@@ -2014,7 +2014,8 @@ var increase_price = function(percents){
 ```
 var increase_price = function(percents){
 	var i = 0; // початкове значення "і" 
-	while(i < goods.length){ // перевірка, яка буде проводитись після кожного виконання циклу
+	while(i < goods.length){ // перевірка, 
+                             // яка буде проводитись після кожного виконання циклу
 		increase_item_price(goods[i], percent);
 		++i; // збільшимо і на одиницю, щоб перейти до наступного індекса
 	}
@@ -2039,9 +2040,9 @@ var increase_price = function(percents){
 ```
 var increase_price = function(percents){
 	var i = 0; // початкове значення "і" 
-	while(goods[i]){ // перевірка, яка буде проводитись після кожного виконання циклу
+	while(goods[i]){
 		increase_item_price(goods[i], percent);
-		++i; // збільшимо і на одиницю, щоб перейти до наступного індекса
+		++i;
 	}
 }
 ```
@@ -2150,16 +2151,16 @@ for(;;){} // вічний цикл, але буде працювати!
 ```
 var tickets = ['used', 'used', 'used', 'unused', 'used', 'unused', 'unused'];
 for(var position in tickets){
-    console.log('checking key #' + position);
+    console.log('checking key ' + position);
     if(tickets[position] === 'unused'){
         break;
     }
 }
 /*
-    checking key #0
-    checking key #1
-    checking key #2
-    checking key #3 
+    checking key 0
+    checking key 1
+    checking key 2
+    checking key 3 
 */
 console.log(position); // 3
 ```
@@ -2182,7 +2183,8 @@ for(var position in tickets){
 }
 
 var active_ticket = tickets.splice(position, 1); // ['unused']
-tickets; // ['used', 'used', 'used', 'used', 'unused', 'unused'] - те саме, тільки без 4 квиточка
+tickets; // ['used', 'used', 'used', 'used', 'unused', 'unused'] 
+// те саме, тільки без 4 квиточка
 ```
 
 @@@
