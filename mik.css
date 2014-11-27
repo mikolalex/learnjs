@@ -19,7 +19,7 @@
 		font-family: monospace;
 		box-sizing: border-box;
 		font-size: 13px;
-		padding: 30px !important;
+		padding: 30px 5px 30px 30px !important;
 		font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 	}
 	
