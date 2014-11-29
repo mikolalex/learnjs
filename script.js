@@ -46,7 +46,7 @@ var process_text = function(str){
                 ['\n(\t*)\n(\t*)\n(\t*)\n', '<hr />'],
                 ['\\|([^\s^\|]{1,})\\|', '<b>$1</b>'],
                 ['@@@([^@]*)@@@', '<div class="block"><p>$1</p></div>'],
-                ['\\^([^\^]*)\\^([^\^]*)\\^', '<div><div class="bad"><pre><code class="js">$1</code></pre></div> <div class="good"><pre><code class="js">$2</code></pre></div><div style="clear:both;"></div></div>'],
+                ['\\^([^\^]*)\\^([^\^]*)\\^', function(match, m1, m2){ return '<div><div class="bad"><pre><code class="js">' + escapeHtml(m1) + '</code></pre></div> <div class="good"><pre><code class="js">' + escapeHtml(m2) + '</code></pre></div><div style="clear:both;"></div></div>'}],
                 ['```(?:[\n]*)?([^`]*)(?:[\n]*)?```', function(match, m1){ return '<pre><code class="js">' + escapeHtml(m1) + '</code></pre>'}],
                 ['\n\n\n', '</p><p>'],
                 ['\n\n', '<br><br>'],
