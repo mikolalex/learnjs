@@ -148,6 +148,9 @@ $.get('text.txt', function(txt) {
 	})
 
 	$(".wrapper").on('paste', ".test input[type=text]", function(e) {
+		if(location.host.indexOf(".loc") !== -1){
+			return true;
+		}
 		active_butt = $(this).closest('.test');
 		fail('Копіпаста заборонена!');
 		return false;

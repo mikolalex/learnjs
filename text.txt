@@ -1072,16 +1072,16 @@ var check_state = function(pregnant, in_love){
 Глибокі рівні вкладеності погіршують читабельність.
 ```
 var check_state = function(pregnant, in_love){
-	if(pregnant AND in_love){
+	if(pregnant && in_love){
 		var state = 'happy';
 	}
-	if(pregnant AND !in_love){
+	if(pregnant && !in_love){
 		var state = 'in_trouble';
 	}
-	if(!pregnant AND in_love){
+	if(!pregnant && in_love){
 		var state = 'happy';
 	}
-	if(!pregnant AND !in_love){
+	if(!pregnant && !in_love){
 		var state = 'OK';
 	}
 	return state;	
@@ -1089,8 +1089,8 @@ var check_state = function(pregnant, in_love){
 ```
 
 Отак вже краще!
-Отже, коли ми пишемо умову, ми можемо вживати ключове слово AND(називається "логічне AND").
-В результаті, значення всього виразу pregnant AND in_love буде true, тільки якщо і pregnant, i in_love будуть true.
+Отже, коли ми пишемо умову, ми можемо вживати ключове слово &&(називається "логічне І", читається як "and").
+В результаті, значення всього виразу "pregnant && in_love" буде true, тільки якщо |і| pregnant, |i| in_love будуть true.
 Якщо ж хоч одне щось із них буде false - весь вираз буде рівним false!
 
 І ще цікава річ, яку ви, сподіваюсь помітили - знако оклику перед змінною. Він означає заперечення.
@@ -1101,19 +1101,19 @@ var guiltless = !guilty; // false
 ```
 Отже, знак оклику перетворює логічну змінну на її протилежність.
 
-Крім логічного AND, є ще і логічне OR! Воно допоможе нам покращити код.
+Крім логічного AND(&&), є ще і логічне OR, яке записується як ||(дві палки). Воно допоможе нам покращити код.
 Ми бачимо, що два випадки є аналогічними(дають один і той же результат - happy).
 Отже, ми можемо об"єднати їх в один.
 
 ```
 var check_state = function(pregnant, in_love){
-	if((pregnant AND in_love) OR (!pregnant AND in_love)){
+	if((pregnant && in_love) || (!pregnant && in_love)){
 		var state = 'happy';
 	}
-	if(pregnant AND !in_love){
+	if(pregnant && !in_love){
 		var state = 'in_trouble';
 	}
-	if(!pregnant AND !in_love){
+	if(!pregnant && !in_love){
 		var state = 'OK';
 	}
 	return state;	
@@ -1156,7 +1156,7 @@ var check_state = function(pregnant, in_love){
 ```
 Ось це вже мені подобається!
 var пишемо один раз. Тобто, змінна гарантовано оголошується на початку, а далі, в певних ситуаціях, може бути перезаписана.
-Вітаю, ви ще раз попрактикувались у рефакторингу, і розібрались, як вправлятись із логічними запереченням(!), AND i OR.
+Вітаю, ви ще раз попрактикувались у рефакторингу, і розібрались, як вправлятись із логічними запереченням(!), AND(&&) i OR(||).
 
 @@@
 @@@
@@ -1432,14 +1432,11 @@ obj[k]; // '0'
 ```
 ```
 /* 
-Напишіть функцію getKey, яка приймає об"єкт і ім"я ключа, і 
+Напишіть функцію getKey, яка приймає об"єкт і ім"я ключа, і повертає його значення
 */
-???4%celebrateBirthday({age: 30}).age === 31 && celebrateBirthday({}).age == undefined%
-    var celebrateBirthday = function(user){
-        if(user.age !== undefined){
-            user.age++;
-        }
-        return user;
+???4%getKey({age: 30}, 'age') === 30%
+    var getKey = function(obj, key){
+        return obj[key];
     }
 %
 ```
@@ -1644,6 +1641,14 @@ man.feelGood();
 
 У реальних буденних задачах веб-програмування вам навряд чи доведеться імітувати реальні процеси по типу поїдання бананів.
 В більшості випадків, за допомогю об"єктів будуть описані елементи веб-сторінки, а операції, які ви можете зробити з ними, будуть методами.
+```
+
+???4%getKey({age: 30}, 'age') === 30%
+    var getKey = function(obj, key){
+        return obj[key];
+    }
+%
+```
 
 # Ще раз про стандартні методи
 
@@ -1788,6 +1793,7 @@ var parse_plate = function(plate){
 @@@
 @@@
 ## Масиви і цикли
+# Масиви
 
 Ми, начебто, оволоділи дуже потужними інструментами, які дозволяють вирішути складні задача програмування.
 Але, нам не вистачає деякої дуже важливої складової, без якої ми не зможемо розв"язати елементарнох проблеми.
@@ -1938,6 +1944,34 @@ console.log(fruits);// ['banana', 'pear']
 var pear = fruits.pop(); // метод pop() видаляє останній елемент масиву і повертає його
 console.log(fruits);// ['banana']
 console.log(pear);// 'pear'
+```
+
+Трохи завдань.
+
+Є дівчинка Даша, яка має різноманітні захоплення(іншими словами, об"єкт із полем name = Dasha, який має також поле hobbies - масив), які інколи змінюються(додаються)
+Однак люди не можуть займатись одночасно десятком справ, тому ми повинні передбачити обмеження: не більше 3 хоббі одночасно.
+Створіть метод addHobbie для додавання нового захоплення Даші.
+Якщо пробуємо додавати 4-е хоббі, то повернути false, інакше - повертаємо true.
+```
+var girl = {
+	name: 'Dasha',
+	hobbies: ['lindy-hop', 'balboa'],
+}
+
+???6%girl.addHobbie && girl.addHobbie("HTML") && girl.hobbies.length === 3 && !girl.addHobbie("CSS") && girl.hobbies.length === 3%
+	girl.addHobbie = function(n){
+		if(this.hobbies.length >= 3){
+			return false; // Too much!
+		} else {
+			this.hobbies.push(n);
+			return true;
+		}
+	}
+%
+/*
+girl.addHobbie('Javascript'); // true
+girl.addHobbie('Photography'); // false
+*/
 ```
 
 # Цикли
@@ -2838,6 +2872,8 @@ Choose your gender:
 ```?
 Звертаю увагу, що методи html() і val() |повністю| замінюють старий вміст елемента новим.
 Якщо ж нам треба дописати щось нове до існуючого контенту, треба скористатись методом append()(або prepend(), щоб додати в початок)
+
+Також існує метод text(), який буде замінювати спецсимволи на їх HTML-коди, екрануючи, таким чином, хтмл.
 ```
 <div class="ex-1">
 	<div style="background-color: red;height:20px;">RED</div>
@@ -2848,11 +2884,15 @@ Choose your gender:
 <div class="ex-3">
 	<div style="background-color: red;height:20px;">RED</div>
 </div>
+<div class="ex-4">
+	<div style="background-color: red;height:20px;">RED</div>
+</div>
 <script>
 	var str = '<div style="background-color: grey;height:20px;">GREY</div>';
 	$(".ex-1").html(str);
-	$(".ex-2").append(str);
-	$(".ex-3").prepend(str);
+	$(".ex-2").text(str);
+	$(".ex-3").append(str);
+	$(".ex-4").prepend(str);
 </script>
 ```? 
 
