@@ -50,10 +50,14 @@ var process_text = function(str) {
 		['\\|([^\s^\|]{1,})\\|', '<b>$1</b>'],
 		['@@@([^@]*)@@@', '<div class="block"><p>$1</p></div>'],
 		['\\^([^\^]*)\\^([^\^]*)\\^', function(match, m1, m2) {
-				return '<div><div class="bad"><pre><code class="js">' + escapeHtml(m1) + '</code></pre></div> <div class="good"><pre><code class="js">' + escapeHtml(m2) + '</code></pre></div><div style="clear:both;"></div></div>'
+				return '<div><div class="bad"><pre><code class="">' + escapeHtml(m1) + '</code></pre></div> <div class="good"><pre><code class="">' + escapeHtml(m2) + '</code></pre></div><div style="clear:both;"></div></div>'
 			}],
-		['```(?:[\n]*)?([^`]*)(?:[\n]*)?```', function(match, m1) {
-				return '<pre><code class="js">' + escapeHtml(m1) + '</code></pre>'
+		['```(?:[\n]*)?([^`]*)(?:[\n]*)?```(\\?)?', function(match, m1, m2) {
+				var str = '<pre><code class="">' + escapeHtml(m1) + '</code></pre>';
+				if(m2){// show the result
+					str += '<h4>Результат:</h4><div class="result example">' + m1 + '</div>';
+				}
+				return str;
 			}],
 		['\n\n\n', '</p><p>'],
 		['\n\n', '<br><br>'],

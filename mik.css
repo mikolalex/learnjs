@@ -219,4 +219,31 @@
 		code {
 			padding: 10px !important;
 		}
+	
+		.example {
+				margin-left: -5px;
+				width: calc(100% + 10px);
+		}
+	}
+	
+	.example {
+		background-color: #f0f0f0;
+		margin-left: -30px;
+		width: calc(100% + 78px);
+		padding: 10px;
+		margin-bottom: 20px;
+	}
+	
+	.example > div {
+		background-color: whitesmoke;
+		padding: 5px;
+		border: 1px solid grey;
+		margin: 10px;
+	}
+	
+	h4 {
+		margin: 5px;
+		text-align: center;
+		margin-top: -25px;
+		
 	}

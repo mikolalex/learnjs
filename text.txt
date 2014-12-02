@@ -764,7 +764,6 @@ var get_link = function(str){
 ```
 @@@
 @@@
-
 ## Гілкування
 
 Джаваскрипт і подібні мови називають також мовами сценаріїв, і це досить влучна назва.
@@ -1735,7 +1734,7 @@ var region_names = {
 	...
 }
 var region_code = 'AP';
-var region = region_codes[region_code]; // 'Zaporizhzhya'
+var region = region_names[region_code]; // 'Zaporizhzhya'
 // !!!
 ```
 Отак набагато краще!
@@ -2772,10 +2771,90 @@ $("ul > li").hide();
 
 |Ви можете викликати скільки завгодно методів у вибраного елемента один за одним, до тих пір, поки якийсь метод не поверне значення|
 
+# Зміна вмісту елементу
 
+Для цього є два основні методи: val() та html(). Перший використовується з тегами, які можуть містити введені юзером значення(input, select і т.д.), а другий - з усіма іншими тегами(div, a і т.д.).
+^
+<div class="form">
+	<input type="text" name="nic" /> - enter your username.
+</div>
+<script>
+	$(".form").val('ololo');// нічого не зміниться
+	$("input[type=text]").html('Mikolalex');// так само нічого не зміниться
+</script>
+^
+<div class="form">
+	<input type="text" name="nic" /> - enter your username.
+</div>
+<script>
+	$("input[type=text]").val('Mikolalex');// ok!
+	$(".form").html('<div>Suddenly!</div>'); // інпут зникне, замість нього - div!
+</script>
+^
+Ці методи, подібно до інших в джквері, мають два способи застосування:
 
+а) якщо не передавати жодного аргумента - буде повернуте поточне значення
 
-
+б) якщо передати аргумент, поточне значення буде замінене ним.
+```
+<div class="some-container">
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+</div> 
+<script>
+	var selector = ".some-container";
+	$(selector).html(); /*
+		Поверне:
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>	
+	*/
+	$(selector).html('<ul>' + 
+			'<li>1</li>' +
+			'<li>2</li>' +
+			'<li>3</li>' +
+			'<li>4</li>' +
+		'</ul>').css('border-color', 'red');
+	// замінить старий ul новим і змінить стиль
+</script>
+```
+```
+Choose your gender:
+<select>
+	<option value="1">Male</option>
+	<option value="2" selected>Female</option>
+	<option value="3">Other</option>
+</select>
+<script>
+	$("select").val(); // 2
+	$("select").val(3); // елемент з value="3" стає вибраним
+	$("select").val(); // 3
+</script>
+```?
+Звертаю увагу, що методи html() і val() |повністю| замінюють старий вміст елемента новим.
+Якщо ж нам треба дописати щось нове до існуючого контенту, треба скористатись методом append()(або prepend(), щоб додати в початок)
+```
+<div class="ex-1">
+	<div style="background-color: red;height:20px;">RED</div>
+</div>
+<div class="ex-2">
+	<div style="background-color: red;height:20px;">RED</div>
+</div>
+<div class="ex-3">
+	<div style="background-color: red;height:20px;">RED</div>
+</div>
+<script>
+	var str = '<div style="background-color: grey;height:20px;">GREY</div>';
+	$(".ex-1").html(str);
+	$(".ex-2").append(str);
+	$(".ex-3").prepend(str);
+</script>
+```? 
 
 @@@
 
