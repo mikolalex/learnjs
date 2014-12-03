@@ -1642,10 +1642,40 @@ man.feelGood();
 У реальних буденних задачах веб-програмування вам навряд чи доведеться імітувати реальні процеси по типу поїдання бананів.
 В більшості випадків, за допомогю об"єктів будуть описані елементи веб-сторінки, а операції, які ви можете зробити з ними, будуть методами.
 ```
+var user = {};
+/*
+Створіть метод setUsername(name), який встановлює об'єкту user значення поля name
+*/
 
-???4%getKey({age: 30}, 'age') === 30%
-    var getKey = function(obj, key){
-        return obj[key];
+???4%(user.setUsername('Sasha') !== false) && user.name === 'Sasha'%
+    user.setUsername = function(name){
+	this.name = name;
+    }
+%
+
+/*
+Додайте йому також метод setPassword(pw, repeat_pw), 
+який приймає два аргументи(введені юзером пароль і підтвердження пароля).
+Якщо вони співпадають, встановлюємо поле password, якщо ні - повертаємо false.
+*/
+???4%(user.setPassword('111', '111') !== false) && user.password === '111' && !user.setPassword(111, 222)%
+    user.setPassword = function(pw1, pw2){
+	if(pw1 !== pw2) return false;
+	this.password = pw1;
+    }
+%
+/*
+Додайте метод login(name, pw), який буде перевіряти, чи збігаються передані ім"я
+ і пароль із уже встановленим паролем і іменем юзера.
+Якщо збігаються, то встановити поле status юзера в "logged_in", якщо ні - то в "logged_out"
+*/
+???6%user.name = 'M'; user.password = 'P';user.login('M', 'P');///user.status === 'logged_in' && (user.login('B', 'P') !== false) && user.status === 'logged_out'%
+    user.login = function(name, pw){
+	if(name === this.name && pw === this.password){
+		this.status = 'logged_in';
+	} else {
+		this.status = 'logged_out';
+	}
     }
 %
 ```
@@ -1789,7 +1819,30 @@ var parse_plate = function(plate){
 	}
 }
 ```
-
+Тепер ми можемо переписати приклад із реєстрацією і логіном юзера у більш цікавій формі.
+```
+/*
+Нехай у об"єкті userpw лежать пари "логін": "пароль"
+*/
+var userpw = {
+	"Mikolalex": "qwerty123",
+	"Eone": "publicPerson",
+	"Sasha": "iAmBig",
+}
+/*
+Напишіть функцію create_user(), яка буде приймати ім"я юзера і пароль, перевіряти, чи не зайняте це ім"я вже кимось,
+і повертати об"єкт з іменем юзера і паролем, якщо все ок, або false, якщо ім"я зайняте.
+*/
+???6%user.name = 'M'; user.password = 'P';user.login('M', 'P');///user.status === 'logged_in' && (user.login('B', 'P') !== false) && user.status === 'logged_out'%
+    user.login = function(name, pw){
+	if(name === this.name && pw === this.password){
+		this.status = 'logged_in';
+	} else {
+		this.status = 'logged_out';
+	}
+    }
+%
+```
 @@@
 @@@
 ## Масиви і цикли

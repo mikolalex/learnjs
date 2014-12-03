@@ -112,7 +112,7 @@ $.get('text.txt', function(txt) {
 	$(".wrapper").on('click', 'a.surrender', function() {
 		var ind = $(this).attr('data-i');
 		active_butt = $(this).closest('.test');
-		normal(ra[ind]);
+		normal(ra[ind].replace(/\&amp\;/g, "&"));
 
 	})
 
@@ -126,16 +126,26 @@ $.get('text.txt', function(txt) {
 			.replace(/\&amp;/g, '&')
 			.replace(/\&gt;/g, '>');
 		var user_code = $(this).prev().val();
+		$(this).closest('code').find('.check').remove();
 		var parent = $(this).closest('code').text()
 			.replace($(this).text(), '')
+			.replace(/перевірити!/g, '')
+			.replace(/Здаюсь\,\sпокажіть\sправильну\sвідповідь/g, '')
 			.replace($(this).closest('code').find('a').text(), '')
-			.replace($(this).closest('code').find('.check').text(), '')
+			.replace($(this).closest('code').find('.check').text(), '');
+		
+		var prepare = '', prep = assert.split("///");
+		if(prep[1]){
+			prepare = prep[0];
+			assert = prep[1];
+		}
 
 		var code = '\
                         (function(){\n\
                                 ' + parent + ' \n\
                                 try { \n\
                                         ' + user_code + ' \n\
+                                        ' + prepare + ' \n\
                                         if(!(' + assert + ')){ fail(); } else { success(); }\n\
                                         \n\
                                 } catch(e){\n\
