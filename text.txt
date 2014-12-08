@@ -1832,14 +1832,21 @@ var userpw = {
 /*
 Напишіть функцію create_user(), яка буде приймати ім"я юзера і пароль, перевіряти, чи не зайняте це ім"я вже кимось,
 і повертати об"єкт з іменем юзера і паролем, якщо все ок, або false, якщо ім"я зайняте.
+А також треба вносити у нашу "базу даних" новозареєстрований юзерів!
+
+create_user('John', 'qwerty123'); // {login: 'John', password: 'qwerty123'}
+create_user('John', 'qwerty321'); // false (такий юзер вже є)
+create_user('Sasha', 'qwerty123'); // false
+
 */
-???6%user.name = 'M'; user.password = 'P';user.login('M', 'P');///user.status === 'logged_in' && (user.login('B', 'P') !== false) && user.status === 'logged_out'%
-    user.login = function(name, pw){
-	if(name === this.name && pw === this.password){
-		this.status = 'logged_in';
-	} else {
-		this.status = 'logged_out';
-	}
+???6% var u1 = create_user('John', 'qwerty123'), u2 = create_user('Sasha', 'qwerty123'), u3 = create_user('John', 'qwerty123')///u1.login === 'John' && u1.password === 'qwerty123' && !u2 && !u3%
+    var create_user = function(login, pw){
+        if(userpw[login]) return false;
+        userpw[login] = pw;
+        return {
+            login: login,
+            password: pw
+        }
     }
 %
 ```
