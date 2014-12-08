@@ -2976,7 +2976,7 @@ Choose your gender:
 ```
 // ця функція відповідає за показ попапа
 var show_popup = function(){
-    var header = 'Hello, Im stupid popap!',
+    var header = 'Hello, Im stupid popup!',
         content = 'Lorem ipsum';
     $(".some-popup-container")
         .show() // = css('display', 'block')
@@ -2990,8 +2990,10 @@ var show_popup = function(){
 var hide_popup = function(){
     $(".some-popup-container").html("").hide();
 }
-$("menu > li.a").click(show_popup); // по кліку - показати попап!(=запустити функцію, яка його показує)
-$(".some-popup-container .close").click(hide_popup); // якщо юзер клікає по кнопці "Close", то закрити попап!
+$("menu > li.a").click(show_popup); // по кліку - показати попап!
+(=запустити функцію, яка його показує)
+$(".some-popup-container .close").click(hide_popup); 
+// якщо юзер клікає по кнопці "Close", то закрити попап!
 ```
 Досить просто і зрозуміло, чи не так? (щоправда, цей код не буде працювати, що, однак, не відміняє його простоти і вишуканості).
 Кожна подія має дві складові: тип і об"єкт. Наприклад, "клік по пункту меню" - тут тип буде "клік", а об"єкт - елементи ДОМ, вибрані по селектору "menu > li".
@@ -3019,23 +3021,23 @@ $(".some-popup-container").click(hide_popup);
 
 Тепер давайте подумаємо над дуже важливим питанням. Коли і скільки разів буде виконана функція show_popup()?
 Подивимось на цей приклад під іншим кутом:
-’’’
+```
 var show_popup = function(){
     console.log('A');
     // doing some real work, bla-bla-bla...
 }
 $("menu > li.a").click(show_popup);
 console.log('B');
-’’’
+```
 Що буде перше виведене в консоль, А чи Б? Звісно, спочатку Б, а потім А!
 Чому?
 Коли ми пишемо
 ```
-$(".some-selector").click(some_handler);
+$("menu > li.a").click(show_popup);
 ```
-в цей момент функція some_handler не викликається! Ми лише наказуємо джаваскрипту: 
+в цей момент функція show_popup не викликається! Ми лише наказуємо джаваскрипту: 
 "якщо станеться така-то подія, викличи цю функцію!", але НЕ виконуємо її!
-Тобто, функція some_handler може і... взагалі ніколи не виконатися!
+Тобто, функція show_popup може і... взагалі ніколи не виконатися!
 Тепер повернімося до нашого прикладу ще раз:
 ```
 var show_popup = function(){
@@ -3081,12 +3083,6 @@ var show_popup = function(){
 
 $("menu > li.a").click(show_popup);
 ```
-
-
-
-
-
-
-
+Це вже "дещо" краще!
 @@@
 
