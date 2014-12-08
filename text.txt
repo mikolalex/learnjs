@@ -3067,7 +3067,7 @@ var hide_popup = function(){
 }
 
 var show_popup = function(){
-    var header = 'Hello, Im stupid popap!',
+    var header = 'Hello, Im stupid popup!',
         content = 'Lorem ipsum';
     $(".some-popup-container")
         .show() // = css('display', 'block')
@@ -3083,5 +3083,48 @@ var show_popup = function(){
 $("menu > li.a").click(show_popup);
 ```
 Це вже "дещо" краще!
+Давайте трохи ускладнимо наш приклад. Якщо попап відкритий, і юзер ще раз клікає по його імені у списку меню, то нехай попап закривається!
+```
+$("menu > li.a").click(/*
+    Якщо попап ще не відкритий, то відкрити його.
+    Якщо вже відкритий, то закрити.
+*/)
+```
+Як нам це зробити? Можна ввести додаткову змінну, "прапорець", яка буде містити інформацію, відкритий зараз попап чи ні.
+Також в якості аргумента для функції click() ми можемо передати анонімну функцію!
+```
+// ось ця змінна, яка нам каже, відкритий попап чи ні.
+var popup_opened = false;
+
+var hide_popup = function(){
+    $(".some-popup-container").html("").hide();
+    // оновлюємо стан!
+    popup_opened = false;
+}
+
+var show_popup = function(){
+    var header = 'Hello, Im stupid popup!',
+        content = 'Lorem ipsum';
+    $(".some-popup-container")
+        .show() // = css('display', 'block')
+        .html('<h2>' 
+            + header + 
+        '</h2><div class="popup_text">' 
+            + content + 
+        '</div><div class="close">Close</div>');
+    $(".some-popup-container .close").click(hide_popup);
+    // оновлюємо стан і тут теж!
+    popup_opened = true;
+}
+
+$("menu > li.a").click(function(){
+    if(popup_opened){
+        hide_popup();
+    } else {
+        show_popup();
+    }
+});
+```
+ 
 @@@
 
