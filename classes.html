@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+	<head>
+		<title>TODO supply a title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+<script>
+
+	var walk = function(arr){
+	         var i=0;
+		 while(i<arr.length) {
+			console.log(arr[i]);
+			++i;
+		 }
+		 
+	}
+	
+	//walk ()
+
+	walk([1, 2, 10]);
+	
+	var arr_add = function(arr, num){
+		var i=0;
+		while(i<arr.length) {
+			arr[i] += num;
+			++i;
+		 }
+	}
+	
+	var dirty_arr_add = function(arr, num){
+		 for(var i=0; i<arr.length; ++i) {
+			arr[i] += num;
+		 }
+	}
+	
+	
+	var pure_arr_add = function(arr, num){
+		var i=0;
+		var b=[];
+		var add = function(a, b){
+			return a + b;
+		}
+		while(i<arr.length) {
+			var res = add(arr[i], num);
+			b[i] = res;
+			++i;
+		 } 
+		 return b;
+	}
+	
+	dirty_arr_add([1, 2, 3], 5); // [6, 7, 8]
+	
+	var pure_arr_add_10 = function(arr){
+		var i=0;
+		var b=[];
+		var add = function(a){
+			return a + 10;
+		}
+		while(i<arr.length) {
+			var res = add(arr[i]);
+			b[i] = res;
+			++i;
+		 } 
+		 return b;
+	}
+	
+	var add = function(a){return a + 10;}
+	
+	var map = function(arr,ddd){
+		var i = 0, b = [];
+		while(i<arr.length) {
+			b[i] = ddd(arr[i]);
+			++i;
+		 } 
+		 return b;
+	}
+	
+	var a = [1, 2, 3];
+	var b = map(a,add);
+	var c = map(a, function(el){ return el*3});
+	var c = map(a, function(el){ return '<b>' + el + '</b>'});
+	console.log(a);
+	console.log('C:', c);
+	console.log('Pure arr:', b); // [6, 7, 8]
+	
+	var add = function(a, b){
+		return a + b;
+	}
+	
+	var get_adder = function(num){
+		var ololo = function(n){
+			return add(num, n);
+		}
+		return ololo;
+	}
+	
+	add(3, 5); // 8
+	
+	var adder_3 = get_adder(3);
+	/*
+	 * 
+	 * 
+		var adder_3 = function(n){
+			return add(3, n);
+		}
+	 * 
+	 */
+	adder_3(2); // 5
+	adder_3(10); // 13
+	
+	get_adder(3)(5); // 8
+	get_adder(3)(10); // 8
+
+</script>
+	</head>
+	<body>
+		<div>TODO write content</div>
+	</body>
+</html>

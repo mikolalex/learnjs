@@ -32,7 +32,13 @@ var normal = function(txt) {
 			.replace(/\&gt;/g, '>')
 			.replace(/\&quot\;/g, '"')
 			.replace(/\&#039\;/g, "'");
-	$("<div />").addClass('check').addClass('normal').text((txt || 'Це дуже просто!')).css('opacity', 0).appendTo(active_butt).animate({opacity: 1}, 500);
+	$("<div />")
+		.addClass('check')
+		.addClass('normal')
+		.text((txt || 'Це дуже просто!'))
+		.css('opacity', 0)
+		.appendTo(active_butt)
+		.animate({opacity: 1}, 500);
 	//active_butt.append('<div class="check error">Невірно</div>').delay(3000)//.find('.check-error').hide();
 }
 var success = function() {
@@ -62,7 +68,7 @@ var process_text = function(str) {
 		['\n\n\n', '</p><p>'],
 		['\n\n', '<br><br>'],
 		['\n\r\n', '<br><br>'],
-		['\\?\\?\\?(.{1,3})?\\%([^\%]*)\\%(([^\%]*)\%)?', function(xxx, multiline, m1, m2, right_answer) {
+		['\\?\\?\\?(.{1,3})?\\%([^\%^]*)\\%(([^\%^]*)\%)?', function(xxx, multiline, m1, m2, right_answer) {
 				var inp = multiline ? '<textarea style="width:calc(100% - 100px);box-sizing:border-box;height:' + (multiline * 20) + 'px"></textarea>' : '<input type="text" placeholder="Введіть свій код сюди..." />';
 				codes.push(m1);
 				var height = multiline ? multiline * 20 : 30;
