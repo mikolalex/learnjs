@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteRule ^([0-9]+)$ index.php?chapter=$1 [QSA,L]
+</IfModule>
