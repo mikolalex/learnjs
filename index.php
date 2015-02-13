@@ -3,7 +3,29 @@
 function debug($a){
 	echo'<pre>';
 	print_r($a);
-	echo'</pre>'; //die();
+	echo'</pre>'; die();
+}
+
+function parse_tasks(){
+	$res = array();
+	$tasks = file_get_contents("./chapters/tasks.txt");
+	$tasks = preg_split("/\={3,}/", $tasks);
+	foreach($tasks AS $key => $val){
+		if(!$val) {
+			unset($tasks[$key]); 
+			continue;
+		}
+		preg_match("/^\s(\S*)/", $val, $r);
+		if(!$r[1]) continue;
+		$parts = preg_split("/\-{3,}/", $val);
+		$res[] = array(
+		    'num' => trim($r[1]),
+		    'text' => trim(preg_replace("/^\s(\S*)/", "", $parts[0], 1)),
+		    'cond' => trim($parts[1]),
+		    'answer' => trim($parts[2])
+		);
+	}
+	file_put_contents("tasks.json", json_encode($res));
 }
 
 function process($txt){
@@ -60,6 +82,8 @@ $max_index = max(array_keys($chapters));
 $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 1;
 
 $text = file_get_contents('./chapters/'.$chapters[$chapter]);
+
+parse_tasks();
 ?><!DOCTYPE html>
 <html>
 	<head>
