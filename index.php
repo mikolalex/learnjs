@@ -15,16 +15,18 @@ function parse_tasks(){
 			unset($tasks[$key]); 
 			continue;
 		}
-		preg_match("/^\s(\S*)/", $val, $r);
+		preg_match("/^\s(\d*)/", $val, $r);
 		if(!$r[1]) continue;
 		$parts = preg_split("/\-{3,}/", $val);
 		$res[] = array(
 		    'num' => trim($r[1]),
-		    'text' => trim(preg_replace("/^\s(\S*)/", "", $parts[0], 1)),
-		    'cond' => trim($parts[1]),
-		    'answer' => trim($parts[2])
+		    'pre' => trim(preg_replace("/^\s(\d*)/", "", $parts[0], 1)),
+		    'text' => trim($parts[1]),
+		    'cond' => trim($parts[2]),
+		    'answer' => trim($parts[3])
 		);
 	}
+        debug($res);
 	file_put_contents("tasks.json", json_encode($res));
 }
 
@@ -104,14 +106,14 @@ parse_tasks();
 				<nav>
 					<div class="l50">
 						<?php if($chapter !== $min_index){?>
-						<a href="/<?php echo $chapter - 1;?>">
+						<a href="./index.php?chapter=<?php echo $chapter - 1;?>">
 							Назад
 						</a>
 						<?php } ?>
 					</div>
 					<div class="r50">
 						<?php if($chapter !== $max_index){?>
-						<a href="/<?php echo $chapter + 1;?>">
+						<a href="./index.php?chapter=<?php echo $chapter + 1;?>">
 							Далі
 						</a>
 						<?php } ?>
