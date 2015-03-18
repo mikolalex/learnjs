@@ -44,235 +44,246 @@ nav a {
 	text-align: justify;
 	padding: 10px 30px;
 }
-	
-	code {
-		font-family: monospace;
-		box-sizing: border-box;
-		font-size: 13px;
-		padding: 30px 5px 30px 30px !important;
-		font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-	}
-	
-	.block img {
-		max-width: 100%;
-	}
-	
-	pre {
-        overflow-x: auto;
-        overflow-y: hidden;
-        margin: 30px 0px;
-        margin-left: -30px;
-        /* margin-right: -20px; */
-        width: calc(100% + 100px);
+
+code {
+        font-family: monospace;
+        box-sizing: border-box;
         font-size: 13px;
-	}
-		
-	h2, h3 {
-		font-weight: normal;
-		text-align: center;
-	}
+        padding: 30px 5px 30px 30px !important;
+        font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
 
-	.wrapper {
-	  max-width: 900px;
-	  margin: auto;
-	}
+.block img {
+        max-width: 100%;
+}
 
-	hr {
-	  height: 1px; 
-	  border: none;
-	  border-top: 2px solid rgb(75, 75, 75);
-	  border-bottom: 1px solid rgb(75, 75, 75);
-	  margin: 40px 70px;
-	}
+pre {
+overflow-x: auto;
+overflow-y: hidden;
+margin: 30px 0px;
+margin-left: -30px;
+/* margin-right: -20px; */
+width: calc(100% + 100px);
+font-size: 13px;
+}
 
-	h1 {
-	  font-weight: normal; 
-	  margin-top: 80px;
-	  margin-bottom: 30px;
-	  padding-left: 110px;
-	  padding-right: 80px;
-	  font-size: 30px;
-	}
-	
-	h2 {
-		font-size: 26px;
-	}
-	h3 {
-		font-size: 19px;
-	}
+h2, h3 {
+        font-weight: normal;
+        text-align: center;
+}
 
-	body {
-	  font-family:  Georgia; 
-	  font-size: 16px;
-	  font-family: 'ProbaPro-Regular';
-	}
+.wrapper {
+  max-width: 900px;
+  margin: auto;
+}
 
-	.block {
-	  border-style: solid;
-	  border-width: 35px 10px 20px 80px;
-	  padding: 50px 70px 40px 30px;
-	  text-align: justify;
-	  border-color: rgb(255, 236, 42); 
-	  margin: 5px;
-	}
+hr {
+  height: 1px; 
+  border: none;
+  border-top: 2px solid rgb(75, 75, 75);
+  border-bottom: 1px solid rgb(75, 75, 75);
+  margin: 40px 70px;
+}
 
-	.block2 {
-	  border-color: rgb(247, 54, 20); 
-	}
+h1 {
+  font-weight: normal; 
+  margin-top: 80px;
+  margin-bottom: 30px;
+  padding-left: 110px;
+  padding-right: 80px;
+  font-size: 30px;
+}
 
-	.block3 {
-	  border-color: rgb(95, 118, 248);
-	}
-	
-	.source {
-		display: none;
-	}
-	
-	pre {
-		box-sizing: border-box;
-	}
-	
-	footer {
-		height: 150px;
-	}
-	
-	p {
-		text-indent: 20px;
-	}
-	
-	li.disabled, li.disabled a {
-		color: grey;
-		cursor: default;
-		text-decoration: none;
-	}
-	
-	a {
-		color: darkred;
-	}
-	
-	li {
-		margin: 15px;
-	}
-	
-	.good, .bad {
-		width: 100%;
-		box-sizing: border-box;
-		margin-top: 25px;
-		position: relative;
-	}
-	
-	.good:before {
-		content: '✔ правильно';		
-		background-color: rgb(255, 236, 42); 
-		top: -15px;
-		left: 15px;
-		color: rgb(52, 52, 52);
-		position: absolute;
-		padding: 5px;
-		box-shadow: 2px 2px 2px grey;
-	}
-	
-	.bad:before {
-		content: '✖ неправильно';		
-		background-color: rgb(247, 54, 20);//  rgb(247, 54, 20);
-		top: -15px;
-		left: 15px;
-		color: rgb(52, 52, 52);
-		position: absolute;
-		padding: 5px;
-		box-shadow: 2px 2px 2px grey;
-	}
-	
-	.test {
-		width: 100%;
-	}
-	.test a span, .test a  {
-		cursor: pointer;
-		color: darkred;
-		text-decoration: underline;
-	}
-	
-	.test button span {
-		color: black !important;
-	}
-	
-	.test button {
-		float: right;
-		width: 100px;
-		height: 30px;
-	}
-	
-	.test input {
-		height: 30px;
-		display: block;
-		float: left;
-		box-sizing: border-box;
-		width: calc(100% - 100px);
-	}
-	
-	.check {
-		padding: 10px;
-	}
-	
-	.check.error {
-		background-color: rgb(201, 30, 0);
-		color: white;
-		font-size: 20px;
-	}
-	
-	.check.success {
-		background-color: rgb(60, 138, 60);
-		color: white;
-		font-size: 20px;
-	}
-	
-	.check.normal {
-		background-color: whitesmoke;
-		color: black;
-		font-size: 16px;
-		border: 1px dotted grey;
-	}
-	
-	@media screen and (max-width: 890px) {
-		.block {
-			margin: 0 auto;
-			border-width: 0px;
-			padding: 10px 5px;
-		}
-		
-		pre {
-			margin-left: -5px;
-			width: calc(100% + 10px);
-		}
-		
-		code {
-			padding: 10px !important;
-		}
-	
-		.example {
-				margin-left: -5px;
-				width: calc(100% + 10px);
-		}
-	}
-	
-	.example {
-		background-color: #f0f0f0;
-		margin-left: -30px;
-		width: calc(100% + 78px);
-		padding: 10px;
-		margin-bottom: 20px;
-	}
-	
-	.example > div {
-		background-color: whitesmoke;
-		padding: 5px;
-		border: 1px solid grey;
-		margin: 10px;
-	}
-	
-	h4 {
-		margin: 5px;
-		text-align: center;
-		margin-top: -25px;
-		
-	}
+h2 {
+        font-size: 26px;
+}
+h3 {
+        font-size: 19px;
+}
+
+body {
+  font-family:  Georgia; 
+  font-size: 16px;
+  font-family: 'ProbaPro-Regular';
+}
+
+.block {
+  border-style: solid;
+  border-width: 35px 10px 20px 80px;
+  padding: 50px 70px 40px 30px;
+  text-align: justify;
+  border-color: rgb(255, 236, 42); 
+  margin: 5px;
+}
+
+.block2 {
+  border-color: rgb(247, 54, 20); 
+}
+
+.block3 {
+  border-color: rgb(95, 118, 248);
+}
+
+.source {
+        display: none;
+}
+
+pre {
+        box-sizing: border-box;
+}
+
+footer {
+        height: 150px;
+}
+
+p {
+        text-indent: 20px;
+}
+
+li.disabled, li.disabled a {
+        color: grey;
+        cursor: default;
+        text-decoration: none;
+}
+
+a {
+        color: darkred;
+}
+
+li {
+        margin: 15px;
+}
+
+.good, .bad {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 25px;
+        position: relative;
+}
+
+.good:before {
+        content: '✔ правильно';		
+        background-color: rgb(255, 236, 42); 
+        top: -15px;
+        left: 15px;
+        color: rgb(52, 52, 52);
+        position: absolute;
+        padding: 5px;
+        box-shadow: 2px 2px 2px grey;
+}
+
+.bad:before {
+        content: '✖ неправильно';		
+        background-color: rgb(247, 54, 20);//  rgb(247, 54, 20);
+        top: -15px;
+        left: 15px;
+        color: rgb(52, 52, 52);
+        position: absolute;
+        padding: 5px;
+        box-shadow: 2px 2px 2px grey;
+}
+
+.test {
+        width: 100%;
+}
+.test a span, .test a  {
+        cursor: pointer;
+        color: darkred;
+        text-decoration: underline;
+}
+
+.test button span {
+        color: black !important;
+}
+
+.test button {
+        float: right;
+        width: 100px;
+        height: 30px;
+}
+
+.test input {
+        height: 30px;
+        display: block;
+        float: left;
+        box-sizing: border-box;
+        width: calc(100% - 100px);
+}
+
+.check {
+        padding: 10px;
+}
+
+.check.error {
+        background-color: rgb(201, 30, 0);
+        color: white;
+        font-size: 20px;
+}
+
+.check.success {
+        background-color: rgb(60, 138, 60);
+        color: white;
+        font-size: 20px;
+}
+
+.check.normal {
+        background-color: whitesmoke;
+        color: black;
+        font-size: 16px;
+        border: 1px dotted grey;
+}
+
+@media screen and (max-width: 890px) {
+        .block {
+                margin: 0 auto;
+                border-width: 0px;
+                padding: 10px 5px;
+        }
+
+        pre {
+                margin-left: -5px;
+                width: calc(100% + 10px);
+        }
+
+        code {
+                padding: 10px !important;
+        }
+
+        .example {
+                        margin-left: -5px;
+                        width: calc(100% + 10px);
+        }
+}
+
+.example {
+        background-color: #f0f0f0;
+        margin-left: -30px;
+        width: calc(100% + 78px);
+        padding: 10px;
+        margin-bottom: 20px;
+}
+
+.example > div {
+        background-color: whitesmoke;
+        padding: 5px;
+        border: 1px solid grey;
+        margin: 10px;
+}
+
+h4 {
+        margin: 5px;
+        text-align: center;
+        margin-top: -25px;
+
+}
+
+.task textarea {
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+    height: 60px;
+}
+.task button {
+  height: 60px;
+  float: right;
+  width: 100px;
+}

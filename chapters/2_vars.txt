@@ -276,44 +276,12 @@ console.log(++a); //37
 Завдання для засвоєння.
 Починаємо ліпити пасочки.
 
-```
-var a = 23;
-var b = 44;
+@@@1
 
-// Напишіть таку змінну "c", яка була б подвоєною сумою змінних "a" i "b"
-
-???%c == 134%var c = a + b;%
-```
 Це пробний приклад. Щоб отримати правильну відповідь, введіть "var c = (a + b)*2;" і натисніть "Перевірити!"
 
 А ось ще завдання
 
-```
-var name = 'John';
-var surname = 'Doe';
+@@@2,3,4
 
-// Створіть змінну fullname, яка б була результатом складення 
-// змінної name, пробіла і змінної surname, тобто, 'John Doe'
-
-???%fullname == "John Doe"%var fullname = name + ' ' + surname;%
-```
-```
-// "Загорніть" текст змінної в тег div
-var str = "Johnny got his gun"; 
-
-// var wrapped = ???; 
-
-???%wrapped == '<div>Johnny got his gun</div>'%var wrapped = '<div>' + str + '</div>'%
-
-// console.log(wrapped); // <div>Johnny got his gun</div>
-```
-
-```
-// нехай змінна tag є тегом, в який треба загорнути строчку, а str - сама строчка.
-var tag = 'b';
-
-var str = 'Hello, Dolly!';
-???%wrapped == '<b>Hello, Dolly!</b>'%var wrapped = '<' + tag + '>' + str + '</' + tag + '>'%
-//console.log(wrapped); // <b>Hello, Dolly!</b>
-```
 Вітаю, ви дещо знаєте про змінні! :)

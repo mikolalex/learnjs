@@ -7,6 +7,7 @@ function debug($a){
 }
 
 function parse_tasks(){
+        global $tasks;
 	$res = array();
 	$tasks = file_get_contents("./chapters/tasks.txt");
 	$tasks = preg_split("/\={3,}/", $tasks);
@@ -26,8 +27,22 @@ function parse_tasks(){
 		    'answer' => trim($parts[3])
 		);
 	}
-        debug($res);
+        //debug($res);
 	file_put_contents("tasks.json", json_encode($res));
+        return $res;
+}
+
+function return_task_html($num){
+    global $tasks;
+    foreach($tasks AS $task){
+        if($task['num'] === $num) break;
+    }
+    $str = '<div class="task"><h5>Завдання №'.$task['num'].'</h5>'
+            . '<div class="pre"><pre><code class="hljs js">'.$task['pre'].'</code></pre></div>'
+            . '<div class="txt">'.$task['text'].'</div>'
+            . '<div class="ans"><textarea></textarea><button>Перевірити!</button></div>'
+            . '</div>';
+    return $str;
 }
 
 function process($txt){
@@ -64,6 +79,12 @@ function process($txt){
 			$str = preg_replace("/\n\r\n/", "\n", $str);
 			return $str;'
 		), $txt);
+	$txt = preg_replace_callback(
+		'/@@@((\d|\,)*)/', 
+		create_function(
+			'$m', 
+			'$nums = split(",", $m[1]); $res = ""; foreach($nums AS $num){ $res .= return_task_html($num);} return $res;'
+		), $txt);
 	$txt = preg_replace('/\n\r\n/', '<br><br>', $txt);
 	return $txt;
 }
@@ -83,9 +104,10 @@ $max_index = max(array_keys($chapters));
 
 $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 1;
 
+$tasks = parse_tasks();
+
 $text = file_get_contents('./chapters/'.$chapters[$chapter]);
 
-parse_tasks();
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -102,7 +124,7 @@ parse_tasks();
 		<div class="wrapper">
 			<h1> Вивчи Javascript - заради добра, заради України!</h1><br/>
 			<div class="block">
-				<?php echo process($text) ?>
+				<?php echo process($text, $tasks) ?>
 				<nav>
 					<div class="l50">
 						<?php if($chapter !== $min_index){?>
