@@ -28,7 +28,9 @@ function parse_tasks(){
 		);
 	}
         //debug($res);
-	file_put_contents("tasks.json", json_encode($res));
+        if(!file_put_contents("./tasks.json", json_encode($res))){
+            die('JSON failed');
+        };
         return $res;
 }
 
@@ -37,7 +39,7 @@ function return_task_html($num){
     foreach($tasks AS $task){
         if($task['num'] === $num) break;
     }
-    $str = '<div class="task"><h5>Завдання №'.$task['num'].'</h5>'
+    $str = '<div class="task" data-id="'.$task['num'].'"><h5>Завдання №'.$task['num'].'</h5>'
             . '<div class="pre"><pre><code class="hljs js">'.$task['pre'].'</code></pre></div>'
             . '<div class="txt">'.$task['text'].'</div>'
             . '<div class="ans"><textarea></textarea><button>Перевірити!</button></div>'
@@ -114,11 +116,12 @@ $text = file_get_contents('./chapters/'.$chapters[$chapter]);
 		<title>Вивчи Javascript - заради добра, заради України!</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+		<script src="jquery.js"></script>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
 		<link rel="stylesheet" href="mik.css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
 		<script src="assert.js"></script>
+                <script src="../firera/firera.neo.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -149,6 +152,28 @@ $text = file_get_contents('./chapters/'.$chapters[$chapter]);
 	$('code').each(function(i, block) {
 		hljs.highlightBlock(block);
 	});
+        $.getJSON("./tasks.json", function(data){
+            //console.log('got', data);
+        })
+        
+        var app = new Firera();
+        app('tasks').$('.task').then(function(els){
+            for(var i in els){
+                els[i] = {
+                    '$rootNode': els[i]
+                }
+            }
+            return els;
+        });
+        app('ts').are({
+            takes: ['$datasource'],
+            each: {
+                id: ['is', '|attr(data-id)']
+            }
+        }, {gives_takes_params: ['tasks']})
+        app.applyTo('.wrapper');
+        console.log(app.get('ts'));
+        console.log(Firera.dump(app('ts')));
 	</script>
 </html><?php
 
