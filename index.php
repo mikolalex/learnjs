@@ -85,7 +85,7 @@ function process($txt){
 		'/@@@((\d|\,)*)/', 
 		create_function(
 			'$m', 
-			'$nums = split(",", $m[1]); $res = ""; foreach($nums AS $num){ $res .= return_task_html($num);} return $res;'
+			'$nums = explode(",", $m[1]); $res = ""; foreach($nums AS $num){ $res .= return_task_html($num);} return $res;'
 		), $txt);
 	$txt = preg_replace('/\n\r\n/', '<br><br>', $txt);
 	return $txt;
@@ -152,11 +152,52 @@ $text = file_get_contents('./chapters/'.$chapters[$chapter]);
 	$('code').each(function(i, block) {
 		hljs.highlightBlock(block);
 	});
+	
+	var get_check_task_func = function(pre, user_input, cond){
+		return new Function(pre + '\n\
+                                try { \n\
+                                        ' + user_input + ' \n\
+                                        if(!(' + cond + ')){ \n\
+						return {success: false}\n\
+					} else { return {success: true} }\n\
+                                        \n\
+                                } catch(e){\n\
+                                        return {success: false, msg: e.message}; \n\
+                                }\n\
+			');
+	}
+	
+	var show_message = function($root, success, msg) {
+		$root.find('.check').remove();
+		var classname = success ? 'success' : 'error';
+		var msg = success ? 'Правильно!' : (msg || 'Невірно!');
+		$("<div />")
+			.addClass('check')
+			.addClass(classname)
+			.text(msg)
+			.css('opacity', 0)
+			.appendTo($root)
+			.animate({opacity: 1}, 500);
+	}
+	
         $.getJSON("./tasks.json", function(data){
-            //console.log('got', data);
+	    var tasks = [];
+	    for(var i in data){
+		    tasks[data[i].num] = data[i];
+	    }
+	    $(".ans button").click(function(){
+		    var root = $(this).closest('[data-id]');
+		    var id = root.attr('data-id');
+		    var task = tasks[id];
+		    var user_input_text = root.find('textarea').val();
+		    var func = get_check_task_func(task.pre, user_input_text, task.cond);
+		    var res = func();
+		    show_message(root, res.success, res.msg);
+		    return false;
+	    })
         })
         
-        var app = new Firera();
+	/*var app = new Firera();
         app('tasks').$('.task').then(function(els){
             for(var i in els){
                 els[i] = {
@@ -173,7 +214,7 @@ $text = file_get_contents('./chapters/'.$chapters[$chapter]);
         }, {gives_takes_params: ['tasks']})
         app.applyTo('.wrapper');
         console.log(app.get('ts'));
-        console.log(Firera.dump(app('ts')));
+        console.log(Firera.dump(app('ts')));*/
 	</script>
 </html><?php
 
